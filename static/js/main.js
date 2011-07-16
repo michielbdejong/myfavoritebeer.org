@@ -27,6 +27,7 @@ function loggedIn(email) {
 function gotVerifiedEmail(assertion) {
   if (assertion) {
     // Now we'll send this assertion over to the verification server for validation
+    // WARNING: This is only an example. In real apps, this verification step must be done from server-side code. 
     var url = "https://browserid.org/verify?assertion=" + window.encodeURIComponent(assertion) +
       "&audience=" + window.encodeURIComponent(window.location.host);
     $.ajax({
@@ -46,7 +47,6 @@ function gotVerifiedEmail(assertion) {
           Crypto.MD5($.trim(data.email).toLowerCase()) +
           "?s=32";
         $("<img>").attr('src', iurl).appendTo($("#header .picture"));
-
         loggedIn(data.email);
       },
       error: function(jqXHR, textStatus, errorThrown) {
